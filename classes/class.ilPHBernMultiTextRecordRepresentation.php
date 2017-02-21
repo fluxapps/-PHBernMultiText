@@ -15,11 +15,11 @@ class ilPHBernMultiTextRecordRepresentation extends ilDclTextRecordRepresentatio
 			return "";
 		}
 
-		$return = "<ul>";
+		$return = "";
 		foreach ($value as $v) {
-			$return .= '<li>' . $v['text'] . '</li>';
+			$return .= '- ' . $v['text'] . '<br>';
 		}
-		$return .= "</ul>";
+		$return = substr($return, 0, -4);
 		return $return;
 	}
 }
