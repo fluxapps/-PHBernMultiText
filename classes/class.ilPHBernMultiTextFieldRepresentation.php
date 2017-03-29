@@ -40,7 +40,6 @@ class ilPHBernMultiTextFieldRepresentation extends ilDclTextFieldRepresentation 
 		$input = new ilDclTextInputGUI($this->getField()->getTitle(), 'text');
 
 		if ($this->getField()->hasProperty(ilDclBaseFieldModel::PROP_LENGTH)) {
-			$input->setInfo($this->lng->txt("dcl_max_text_length") . ": " . $this->getField()->getProperty(ilDclBaseFieldModel::PROP_LENGTH));
 			if (!$this->getField()->getProperty(ilDclBaseFieldModel::PROP_TEXTAREA)) {
 				$input->setMaxLength($this->getField()->getProperty(ilDclBaseFieldModel::PROP_LENGTH));
 			}

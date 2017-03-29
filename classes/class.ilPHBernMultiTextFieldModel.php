@@ -73,7 +73,7 @@ class ilPHBernMultiTextFieldModel extends ilDclTextFieldModel {
 		$max_selectable = $this->getProperty(self::PROP_MAX_SELECTABLE);
 		$mandatory_fields = $this->getProperty(self::PROP_MANDATORY_FIELDS);
 		if (count($value) > $max_selectable || count($value) < $mandatory_fields) {
-			throw new ilDclInputException(ilDclInputException::CUSTOM_MESSAGE, $this->pl->txt('exception_wrong_count'));
+			throw new ilDclInputException(ilDclInputException::CUSTOM_MESSAGE, sprintf($this->pl->txt('exception_wrong_count'), $mandatory_fields));
 		}
 
 
