@@ -8,6 +8,7 @@ require_once("./Modules/DataCollection/classes/Fields/Text/class.ilDclTextFieldM
  * @author  Theodor Truffer <tt@studer-raimann.ch>
  */
 class ilPHBernMultiTextFieldModel extends ilDclTextFieldModel {
+
 	const PROP_MAX_SELECTABLE = 'phbe_multiref_max_selectable';
 	const PROP_MANDATORY_FIELDS = 'phbe_multiref_mandatory_fields';
 
@@ -52,28 +53,31 @@ class ilPHBernMultiTextFieldModel extends ilDclTextFieldModel {
 	}
 
 
+	/**
+	 * @param      $value
+	 * @param null $record_id
+	 *
+	 * @return bool
+	 * @throws ilDclInputException
+	 */
 	public function checkValidity($value, $record_id = NULL) {
+		//filter out empty entries for a proper check
+		foreach ($value as $k => $v) {
+			$value[$k] = array_filter($v);
+			if (isset($value[$k]['text'])) {
+				parent::checkValidity($value[$k]['text'], $record_id);
+			}
+		}
+		$value = array_filter($value);
+
 		$max_selectable = $this->getProperty(self::PROP_MAX_SELECTABLE);
 		$mandatory_fields = $this->getProperty(self::PROP_MANDATORY_FIELDS);
 		if (count($value) > $max_selectable || count($value) < $mandatory_fields) {
 			throw new ilDclInputException(ilDclInputException::CUSTOM_MESSAGE, $this->pl->txt('exception_wrong_count'));
 		}
 
-		foreach ($value as $v) {
-			parent::checkValidity($v, $record_id);
-		}
 
 		return true;
 	}
 
-
-	protected function checkRegexAndLength($value) {
-		foreach ($value as $v) {
-			if ($this->getProperty(ilDclBaseFieldModel::PROP_LENGTH) < $this->strlen($v, 'UTF-8')
-				&& is_numeric($this->getProperty(ilDclBaseFieldModel::PROP_LENGTH))
-			) {
-				throw new ilDclInputException(ilDclInputException::LENGTH_EXCEPTION);
-			}
-		}
-	}
 }

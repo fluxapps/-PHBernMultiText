@@ -9,4 +9,17 @@ require_once('./Modules/DataCollection/classes/Fields/Text/class.ilDclTextRecord
  */
 class ilPHBernMultiTextRecordFieldModel extends ilDclTextRecordFieldModel {
 
+	/**
+	 * filter out empty entries
+	 *
+	 * @param ilPropertyFormGUI $form
+	 */
+	public function setValueFromForm($form) {
+		$value = $form->getInput("field_" . $this->getField()->getId());
+		foreach ($value as $k => $v) {
+			$value[$k] = array_filter($v);
+		}
+		$value = array_values(array_filter($value));
+		$this->setValue($value);
+	}
 }
