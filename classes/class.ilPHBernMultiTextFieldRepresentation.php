@@ -33,8 +33,11 @@ class ilPHBernMultiTextFieldRepresentation extends ilDclTextFieldRepresentation 
 		$multi_line = new srDclContentImporterMultiLineInputGUI($this->getField()->getTitle(), 'field_' . $this->getField()->getId());
 		$multi_line->setTemplateDir(ilDclContentImporterPlugin::getInstance()->getDirectory());
 
-		if ($limit = $this->getField()->getProperty(ilPHBernMultiTextFieldModel::PROP_MAX_SELECTABLE)) {
+		$limit = $this->getField()->getProperty(ilPHBernMultiTextFieldModel::PROP_MAX_SELECTABLE);
+
+		if ($limit) {
 			$multi_line->setLimit($limit);
+			$multi_line->setInfo(sprintf($this->pl->txt('max'), $limit));
 		}
 
 		$input = new ilDclTextInputGUI($this->getField()->getTitle(), 'text');
