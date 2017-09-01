@@ -49,6 +49,7 @@ class ilPHBernMultiTextFieldRepresentation extends ilDclTextFieldRepresentation 
 		}
 
 		$multi_line->addInput($input);
+		$this->setupInputField($multi_line,$this->getField());
 		return $multi_line;
 	}
 
