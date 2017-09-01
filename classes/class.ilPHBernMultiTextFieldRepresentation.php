@@ -37,7 +37,7 @@ class ilPHBernMultiTextFieldRepresentation extends ilDclTextFieldRepresentation 
 
 		if ($limit) {
 			$multi_line->setLimit($limit);
-			$multi_line->setInfo(sprintf($this->pl->txt('max'), $limit));
+			$multi_line->setInfo(sprintf($this->pl->txt('max'),(int) $this->getField()->getRequired(),$limit));
 		}
 
 		$input = new ilDclTextInputGUI($this->getField()->getTitle(), 'text');

@@ -1,4 +1,4 @@
 max_selectable#:#Maximale Auswahl
 mandatory_fields#:#Minimale Auswahl
 exception_wrong_count#:#Mindestanzahl Zeilen: %s
-max#:#Hier sind max. %d Einträge möglich.
+max#:#Minimale Auswahl: %d Feld(er), Maximale Auswahl: %d Feld(er)
