@@ -22,4 +22,6 @@ class ilPHBernMultiTextRecordFieldModel extends ilDclTextRecordFieldModel {
 		$value = array_values(array_filter($value));
 		$this->setValue($value);
 	}
+
+
 }

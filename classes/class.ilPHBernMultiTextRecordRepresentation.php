@@ -22,4 +22,16 @@ class ilPHBernMultiTextRecordRepresentation extends ilDclTextRecordRepresentatio
 		$return = substr($return, 0, -4);
 		return $return;
 	}
+
+
+	/**
+	 * @inheritDoc
+	 */
+	public function fillFormInput($form) {
+		$input_field = $form->getItemByPostVar('field_'.$this->getField()->getId());
+		$raw_input = $this->getFormInput();
+
+		$field_values["field_".$this->getRecordField()->getField()->getId()] = $raw_input;
+		$input_field->setValueByArray($field_values);
+	}
 }
